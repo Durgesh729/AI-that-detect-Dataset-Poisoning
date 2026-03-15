@@ -5,10 +5,16 @@ import numpy as np
 import pandas as pd
 
 def run_script(script_name):
+    # Get the directory of the current file (main.py)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    script_path = os.path.join(base_dir, "scripts", script_name)
+    
     print(f"\n" + "="*50)
     print(f"RUNNING: {script_name}")
     print("="*50)
-    result = subprocess.run([sys.executable, f"dataset_poison_detection/scripts/{script_name}"], capture_output=False)
+    
+    # Run from the base_dir so that relative paths in scripts work correctly
+    result = subprocess.run([sys.executable, script_path], capture_output=False, cwd=base_dir)
     if result.returncode != 0:
         print(f"Error running {script_name}")
     return result.returncode == 0
@@ -27,7 +33,8 @@ def main():
         "isolation_forest_detector.py",
         "autoencoder_detector.py",
         "influence_functions.py",
-        "trust_score.py"
+        "trust_score.py",
+        "train_eval.py"
     ]
 
     for stage in pipeline_stages:

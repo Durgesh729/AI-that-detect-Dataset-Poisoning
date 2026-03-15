@@ -1,0 +1,9 @@
+Dataset Poisoning Evaluation Results
+====================================
+Baseline Accuracy: 98.98%
+Backdoor (Poisoned) Accuracy: 98.58%
+Backdoor (Poisoned) ASR: 100.00%
+Backdoor (Defended) Accuracy: 97.20%
+Backdoor (Defended) ASR: 100.00%
+Label Flip (Poisoned) Accuracy: 98.58%
+Label Flip (Defended) Accuracy: 98.11%
