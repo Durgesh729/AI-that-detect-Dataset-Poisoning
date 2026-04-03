@@ -34,7 +34,7 @@ def main():
         "autoencoder_detector.py",
         "influence_functions.py",
         "trust_score.py",
-        "train_eval.py"
+        "visual_report.py"
     ]
 
     for stage in pipeline_stages:

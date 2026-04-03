@@ -13,11 +13,11 @@ class Autoencoder(nn.Module):
         self.encoder = nn.Sequential(
             nn.Linear(input_dim, 128),
             nn.ReLU(),
-            nn.Linear(128, 32),
+            nn.Linear(128, 8), # Reduced bottleneck for better anomaly detection
             nn.ReLU()
         )
         self.decoder = nn.Sequential(
-            nn.Linear(32, 128),
+            nn.Linear(8, 128),
             nn.ReLU(),
             nn.Linear(128, input_dim),
             nn.Sigmoid()
@@ -45,13 +45,10 @@ def run_autoencoder(dataset_path, name):
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=1e-3)
     
-    # Train for a few epochs - in a real scenario, this would be trained on clean data
-    # Here we demonstrate the concept by training on the (possibly poisoned) dataset
-    # and identifying samples with highest reconstruction error.
     dataloader = DataLoader(tensor_data, batch_size=64, shuffle=True)
     
     print("Training autoencoder...")
-    for epoch in range(5):
+    for epoch in range(10): # Increased epochs
         total_loss = 0
         for batch in dataloader:
             optimizer.zero_grad()

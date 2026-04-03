@@ -17,9 +17,9 @@ def run_isolation_forest(dataset_path, name):
     
     data = np.array(data)
     
-    # Fit Isolation Forest
-    # contamination is the expected proportion of outliers
-    clf = IsolationForest(contamination=0.1, random_state=42, n_jobs=-1)
+    # Fit Isolation Forest with optimized parameters
+    # Doubling contamination and estimators to improve recall
+    clf = IsolationForest(contamination=0.2, n_estimators=200, random_state=42, n_jobs=-1)
     preds = clf.fit_predict(data)
     
     # IsolationForest returns -1 for outliers and 1 for inliers
